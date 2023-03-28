@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.18
+    # 必要时可以在这里指定依赖镜像
+    # - image: circleci/mysql:9.4
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run:
+          name: Get all dependencies
+          command: |
+            go get -v ./..
+            go get -u github.com/ginkgo/ginkgo
+            go get github.com/onsi/gomega/...
+      - run:
+          name: Test everything
+          command: ginkgo -r -race -failFast -progress
+      - setup_remote_docker:
+          docker_layer_caching: true
+#      - run:
+#          name: docker build
+#          command: |
+#            docker build -t kratos-m .
+#            docker run --rm -p 8000:8000 -p 9000:9000 -v </path/to/your/configs>:/data/conf kratos-m
