@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package api.mykratos.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "kratos-m/api/mykratos/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.mykratos.v1";
+
+service M {
+	rpc CreateM (CreateMRequest) returns (CreateMReply){
+		option (google.api.http) = {
+			post: "/mykratos/v1/m"
+		};
+	};
+	rpc UpdateM (UpdateMRequest) returns (UpdateMReply){
+		option (google.api.http) = {
+			put: "/mykratos/v1/m"
+		};
+	};
+	rpc DeleteM (DeleteMRequest) returns (DeleteMReply){
+		option (google.api.http) = {
+			delete: "/mykratos/v1/m"
+		};
+	};
+	rpc GetM (GetMRequest) returns (GetMReply){
+		option (google.api.http) ={
+			get: "/mykratos/v1/m"
+		};
+	};
+	rpc ListM (ListMRequest) returns (ListMReply){
+		option (google.api.http) = {
+			post: "/mykratos/v1/m/list"
+		};
+	};
+}
+
+message CreateMRequest {}
+message CreateMReply {}
+
+message UpdateMRequest {}
+message UpdateMReply {}
+
+message DeleteMRequest {}
+message DeleteMReply {}
+
+message GetMRequest {}
+message GetMReply {}
+
+message ListMRequest {}
+message ListMReply {}
