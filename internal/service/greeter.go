@@ -12,6 +12,8 @@ type GreeterService struct {
 	v1.UnimplementedGreeterServer
 
 	uc *biz.GreeterUsecase
+
+	muc *biz.MyUseCase
 }
 
 // NewGreeterService new a greeter service.

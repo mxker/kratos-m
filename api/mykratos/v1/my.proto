@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package api.mykratos.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "kratos-m/api/mykratos/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.mykratos.v1";
+
+service My {
+	rpc CreateMy (CreateMyRequest) returns (CreateMyReply){
+		option (google.api.http) = {
+			post: "/v1/my",
+			body: "*"
+		};
+	};
+	rpc UpdateMy (UpdateMyRequest) returns (UpdateMyReply){
+		option (google.api.http) = {
+			put: "/v1/my/{id}",
+			body: "*"
+		};
+	};
+	rpc DeleteMy (DeleteMyRequest) returns (DeleteMyReply){
+		option (google.api.http) = {
+			delete: "/v1/my/{id}"
+		};
+	};
+	rpc GetMy (GetMyRequest) returns (GetMyReply){
+		option (google.api.http)={
+			get: "/v1/my/{id}"
+				};
+	};
+	rpc ListMy (ListMyRequest) returns (ListMyReply){
+		option (google.api.http) = {
+			get: "/v1/my"
+		};
+	};
+}
+
+message MyContent {
+	int64 id = 1;
+	string name = 2;
+}
+
+message CreateMyRequest {
+	string name = 1;
+}
+message CreateMyReply {
+	MyContent MyContent = 1;
+}
+
+message UpdateMyRequest {
+	int64 id = 1;
+	string name = 2;
+}
+message UpdateMyReply {
+	MyContent MyContent = 1;
+}
+
+message DeleteMyRequest {
+	int64 id = 1;
+}
+message DeleteMyReply {}
+
+message GetMyRequest {
+	int64 id = 1;
+}
+message GetMyReply {
+	MyContent MyContent = 1;
+}
+
+message ListMyRequest {}
+message ListMyReply {
+	repeated MyContent results = 1;
+}
